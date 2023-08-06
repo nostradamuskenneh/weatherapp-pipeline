@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+<<<<<<< HEAD
     stages {
       stage('Login to Docker Hub') {
         steps{
@@ -34,6 +35,16 @@ pipeline {
                   }
               }
       stage('build') {
+=======
+stages {
+ stage('Login to Docker Hub') {
+  steps{
+    sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
+    echo 'Login Completed'
+  }
+}
+        stage('clone') {
+>>>>>>> 9cb2c9df2bcff6923a90b89669b91b77df77bcb4
             steps {
                 sh '''
                 ls 
@@ -41,5 +52,25 @@ pipeline {
                 '''
             }
         }
+<<<<<<< HEAD
           }
       }
+=======
+
+   stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
+    }
+  }
+        stage('build') {
+            steps {
+                sh '''
+                ls 
+                pwd
+                '''
+            }
+        }
+    }
+}
+>>>>>>> 9cb2c9df2bcff6923a90b89669b91b77df77bcb4
