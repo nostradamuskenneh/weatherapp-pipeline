@@ -1,7 +1,5 @@
 pipeline {
     agent any
-
-<<<<<<< HEAD
     stages {
       stage('Login to Docker Hub') {
         steps{
@@ -35,17 +33,15 @@ pipeline {
                   }
               }
       stage('build') {
-=======
-stages {
- stage('Login to Docker Hub') {
-  steps{
-    sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
-    echo 'Login Completed'
-  }
-}
-        stage('clone') {
->>>>>>> 9cb2c9df2bcff6923a90b89669b91b77df77bcb4
-            steps {
+         stages {
+           stage('Login to Docker Hub') {
+            steps{
+              sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
+              echo 'Login Completed'
+            }
+          }
+      stage('clone') {
+         steps {
                 sh '''
                 ls 
                 pwd
