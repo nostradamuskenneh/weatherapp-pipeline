@@ -32,8 +32,7 @@ pipeline {
              }
                   }
               }
-      stage('build') {
-         stages {
+
            stage('Login to Docker Hub') {
             steps{
               sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
@@ -65,5 +64,4 @@ pipeline {
         }
     }
 }
-    }
-}
+
