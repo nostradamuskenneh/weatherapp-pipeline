@@ -48,10 +48,6 @@ pipeline {
                 '''
             }
         }
-<<<<<<< HEAD
-          }
-      }
-=======
 
    stage('SonarQube Analysis') {
     def scannerHome = tool 'SonarScanner';
@@ -69,4 +65,4 @@ pipeline {
         }
     }
 }
->>>>>>> 9cb2c9df2bcff6923a90b89669b91b77df77bcb4
+
