@@ -39,7 +39,7 @@ pipeline {
        //       echo 'Login Completed'
        //     }
        //   }
-      stage('clone') {
+      stage('clone2') {
          steps {
                 sh '''
                 ls 
