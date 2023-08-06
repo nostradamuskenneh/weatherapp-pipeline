@@ -28,7 +28,7 @@ stage('Login to Docker Hub') {
         scannerHome='/opt/sonar-scanner'
     }
             steps{
-                withSonarQubeEnv('Sonar1') {
+                withSonarQubeEnv('sonar-scanner') {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
