@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         // Make sure 'sonarqube' matches the configured SonarQube installation name in Jenkins
-        sonarqube 'SonarQube'
+        sonar 'SonarQube'
     }
     stages {
       stage('Login to Docker Hub') {
