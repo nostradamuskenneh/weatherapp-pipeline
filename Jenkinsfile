@@ -4,7 +4,7 @@ pipeline {
     stages {
 stage('Login to Docker Hub') {
   steps{
-    sh 'echo $Dokerhub_PSW | docker login -u $Dokerhub_USR --password-stdin'
+    sh 'echo Amara1988_PSW | docker login -u $oumarkenneh_USR --password-stdin'
     echo 'Login Completed'
   }
 }
