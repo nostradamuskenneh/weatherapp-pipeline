@@ -92,9 +92,9 @@ pipeline {
                     sh '''
                         git config --global user.email "kenneho@yahoo.com"
                         git config --global user.name "nostradamuskenneh"
-                        git clone https://github.com/nostradamuskenneh/CHARTS.git
-                        rm -rf  CHARTS
-                        cd CHARTS
+                        rm -rf  CHARTS1
+                        git clone https://github.com/nostradamuskenneh/CHARTS1.git
+                        cd CHARTS1
                         ls
                         cd weatherapp-weather/
         cat << EOF > dev-value.yaml
@@ -106,7 +106,7 @@ pipeline {
         EOF
                        
                           cd -
-                          cd CHARTS
+                          cd CHARTS1
                           ls
                           cd weatherapp-ui/
 
@@ -118,7 +118,7 @@ pipeline {
         tag: ""
         EOF
                          cd -
-                         cd CHARTS
+                         cd CHARTS1
                          ls
                          cd weatherapp-auth/
                          ls
@@ -130,7 +130,7 @@ pipeline {
         tag: ""
         EOF
                          cd -
-                         cd CHARTS
+                         cd CHARTS1
                          ls
                          cd weatherapp-mysql/
         cat << EOF > dev-value.yaml
