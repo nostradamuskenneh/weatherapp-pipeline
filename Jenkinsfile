@@ -96,7 +96,8 @@ pipeline {
                         git clone https://github.com/nostradamuskenneh/CHARTS1.git
                         cd CHARTS1
                         ls
-                        cd weatherapp-weather/
+                        cd weatherapp-weather
+                    
         cat << EOF > dev-value.yaml
         replicaCount: 2
         image:
@@ -105,9 +106,9 @@ pipeline {
         tag: ""
         EOF
                        
-
-                          ls
-                          cd weatherapp-ui/
+        cd ..
+         ls
+         cd weatherapp-ui/
 
         cat << EOF > dev-value.yaml
         replicaCount: 2
@@ -117,9 +118,10 @@ pipeline {
         tag: ""
         EOF
 
-                         ls
-                         cd weatherapp-auth/
-                         ls
+          ls
+          cd ..
+          cd weatherapp-auth
+          ls
         cat << EOF > dev-value.yaml
         replicaCount: 2
         image:
@@ -129,6 +131,7 @@ pipeline {
         EOF
 
                          ls
+                         cd ..
                          cd weatherapp-mysql/
         cat << EOF > dev-value.yaml
         replicaCount: 2
