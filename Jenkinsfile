@@ -92,6 +92,45 @@ pipeline {
                     sh '''
                         git config --global user.email "kenneho@yahoo.com"
                         git config --global user.name "nostradamuskenneh"
+                        git clone https://github.com/nostradamuskenneh/CHARTS.git
+                        cd CHARTS
+                        cd weatherapp-weather/
+        cat << EOF > dev-value.yaml
+        replicaCount: 2
+        image:
+        repository: afakharany/weatherapp-weather
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                       
+                          cd -
+                          cd weatherapp-ui/
+
+        cat << EOF > dev-value.yaml
+        replicaCount: 2
+        image:
+        repository: afakharany/weatherapp-ui
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                         cd -
+                         cd weatherapp-auth/
+        cat << EOF > dev-value.yaml
+        replicaCount: 2
+        image:
+        repository: afakharany/weatherapp-auth
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                         cd -
+                         cd weatherapp-mysql/
+        cat << EOF > dev-value.yaml
+        replicaCount: 2
+        image:
+        repository: afakharany/weatherapp-mysql
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
                         git add .
                         git commit -m "Jenkins automated commit"
                         git push origin main
@@ -102,67 +141,30 @@ pipeline {
         stage('update weatherapp-weather') {
             steps {
                 sh '''
-            git clone https://github.com/nostradamuskenneh/CHARTS.git
-            cd CHARTS
-            cd weatherapp-weather/
-        cat << EOF > dev-value.yaml
-        replicaCount: 2
-
-        image:
-        repository: afakharany/weatherapp-weather
-        pullPolicy: IfNotPresent
-        tag: ""
-        EOF
+                ls
                 '''
             }
         }
         stage('update weatherapp-ui') {
             steps {
                 sh '''
-            git clone https://github.com/nostradamuskenneh/CHARTS.git
-            cd CHARTS
-            cd weatherapp-ui/
-        cat << EOF > dev-value.yaml
-        replicaCount: 2
-        image:
-        repository: afakharany/weatherapp-ui
-        pullPolicy: IfNotPresent
-        tag: ""
-        EOF
+                ls
                 '''
             }
         }
         stage('update weatherapp-auth') {
             steps {
                 sh '''
-            git clone https://github.com/nostradamuskenneh/CHARTS.git
-            cd CHARTS
-            cd weatherapp-auth/
-        cat << EOF > dev-value.yaml
-        replicaCount: 2
+                 pwd
 
-        image:
-        repository: afakharany/weatherapp-auth
-        pullPolicy: IfNotPresent
-        tag: ""
-        EOF
                 '''
             }
         }
         stage('update weatherapp-mysql') {
             steps {
         sh '''
-            git clone https://github.com/nostradamuskenneh/CHARTS.git
-            cd CHARTS
-            cd weatherapp-mysql/
-        cat << EOF > dev-value.yaml
-        replicaCount: 2
+           id
 
-        image:
-        repository: afakharany/weatherapp-mysql
-        pullPolicy: IfNotPresent
-        tag: ""
-        EOF
         '''
             }
         }
