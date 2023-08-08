@@ -78,6 +78,63 @@ pipeline {
                 '''
             }
         }
+
+        stage('update weatherapp-auth') {
+            steps {
+                sh '''
+        cat << EOF > weatherapp-weather/dev-value.yaml
+        replicaCount: 2
+
+        image:
+        repository: afakharany/weatherapp-auth
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                '''
+            }
+        }
+        stage('update weatherapp-mysql') {
+            steps {
+                sh '''
+        cat << EOF > weatherapp-weather/dev-value.yaml
+        replicaCount: 2
+
+        image:
+        repository: afakharany/weatherapp-auth
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                '''
+            }
+        }
+        stage('update weatherapp-ui') {
+            steps {
+                sh '''
+        cat << EOF > weatherapp-weather/dev-value.yaml
+        replicaCount: 2
+
+        image:
+        repository: afakharany/weatherapp-auth
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                '''
+            }
+        }
+        stage('update weatherapp-weather') {
+            steps {
+        sh '''
+        cat << EOF > weatherapp-weather/dev-value.yaml
+        replicaCount: 2
+
+        image:
+        repository: afakharany/weatherapp-auth
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+        '''
+            }
+        }
     }
 
 }
