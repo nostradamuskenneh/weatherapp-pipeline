@@ -1,7 +1,5 @@
 pipeline {
     agent any
-        
-    
     stages {
       stage('Login to Docker Hub') {
         steps{
@@ -17,12 +15,6 @@ pipeline {
              '''
          }
      }
-
-         stage('SonarQube analysis') {
-           when{  
-            expression {
-              env.ENVIRONMENT == 'DEV' }
-              }
             agent {
                 docker {
                   image 'sonarsource/sonar-scanner-cli:4.7.0'
