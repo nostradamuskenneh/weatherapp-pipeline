@@ -39,7 +39,7 @@ pipeline {
                 docker build -t db .
                 cd -
                 cd UI
-                docker build -t UI .
+                docker build -t ui .
                 cd -
                 cd auth
                 docker build -t auth .
