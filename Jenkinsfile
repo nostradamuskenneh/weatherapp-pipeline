@@ -78,11 +78,67 @@ pipeline {
                 '''
             }
         }
+        stage('Checkout chart repo') {
+            steps {
+                // Checkout code from your repository
+                checkout scm
+            }
+        }
+        
+        stage('Push to GitHub') {
+            steps {
+                script {
+                    def githubToken = credentials('github-token') // Use the ID of the credential you added
+                    sh '''
+                        git config --global user.email "kenneho@yahoo.com"
+                        git config --global user.name "nostradamuskenneh"
+                        git add .
+                        git commit -m "Jenkins automated commit"
+                        git push origin main
+                    '''
+                }
+            }
+        }
+        stage('update weatherapp-weather') {
+            steps {
+                sh '''
+            git clone https://github.com/nostradamuskenneh/CHARTS.git
+            cd CHARTS
+            cd weatherapp-weather/
+        cat << EOF > dev-value.yaml
+        replicaCount: 2
 
+        image:
+        repository: afakharany/weatherapp-weather
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                '''
+            }
+        }
+        stage('update weatherapp-ui') {
+            steps {
+                sh '''
+            git clone https://github.com/nostradamuskenneh/CHARTS.git
+            cd CHARTS
+            cd weatherapp-ui/
+        cat << EOF > dev-value.yaml
+        replicaCount: 2
+        image:
+        repository: afakharany/weatherapp-ui
+        pullPolicy: IfNotPresent
+        tag: ""
+        EOF
+                '''
+            }
+        }
         stage('update weatherapp-auth') {
             steps {
                 sh '''
-        cat << EOF > weatherapp-weather/dev-value.yaml
+            git clone https://github.com/nostradamuskenneh/CHARTS.git
+            cd CHARTS
+            cd weatherapp-auth/
+        cat << EOF > dev-value.yaml
         replicaCount: 2
 
         image:
@@ -95,40 +151,15 @@ pipeline {
         }
         stage('update weatherapp-mysql') {
             steps {
-                sh '''
-        cat << EOF > weatherapp-weather/dev-value.yaml
-        replicaCount: 2
-
-        image:
-        repository: afakharany/weatherapp-auth
-        pullPolicy: IfNotPresent
-        tag: ""
-        EOF
-                '''
-            }
-        }
-        stage('update weatherapp-ui') {
-            steps {
-                sh '''
-        cat << EOF > weatherapp-weather/dev-value.yaml
-        replicaCount: 2
-
-        image:
-        repository: afakharany/weatherapp-auth
-        pullPolicy: IfNotPresent
-        tag: ""
-        EOF
-                '''
-            }
-        }
-        stage('update weatherapp-weather') {
-            steps {
         sh '''
-        cat << EOF > weatherapp-weather/dev-value.yaml
+            git clone https://github.com/nostradamuskenneh/CHARTS.git
+            cd CHARTS
+            cd weatherapp-mysql/
+        cat << EOF > dev-value.yaml
         replicaCount: 2
 
         image:
-        repository: afakharany/weatherapp-auth
+        repository: afakharany/weatherapp-mysql
         pullPolicy: IfNotPresent
         tag: ""
         EOF
