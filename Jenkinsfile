@@ -93,6 +93,7 @@ pipeline {
                         git config --global user.email "kenneho@yahoo.com"
                         git config --global user.name "nostradamuskenneh"
                         git clone https://github.com/nostradamuskenneh/CHARTS.git
+                        rm -rf  CHARTS
                         cd CHARTS
                         ls
                         cd weatherapp-weather/
