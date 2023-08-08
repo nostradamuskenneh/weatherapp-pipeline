@@ -94,6 +94,7 @@ pipeline {
                         git config --global user.name "nostradamuskenneh"
                         git clone https://github.com/nostradamuskenneh/CHARTS.git
                         cd CHARTS
+                        ls
                         cd weatherapp-weather/
         cat << EOF > dev-value.yaml
         replicaCount: 2
@@ -104,6 +105,8 @@ pipeline {
         EOF
                        
                           cd -
+                          cd CHARTS
+                          ls
                           cd weatherapp-ui/
 
         cat << EOF > dev-value.yaml
@@ -114,7 +117,10 @@ pipeline {
         tag: ""
         EOF
                          cd -
+                         cd CHARTS
+                         ls
                          cd weatherapp-auth/
+                         ls
         cat << EOF > dev-value.yaml
         replicaCount: 2
         image:
@@ -123,6 +129,8 @@ pipeline {
         tag: ""
         EOF
                          cd -
+                         cd CHARTS
+                         ls
                          cd weatherapp-mysql/
         cat << EOF > dev-value.yaml
         replicaCount: 2
