@@ -32,9 +32,22 @@ pipeline {
               echo 'Login Completed'
             }
           }
-      stage('clone2') {
+      stage('Build DB') {
          steps {
                 sh '''
+                cd DB
+                docker build -t db .
+                cd -
+                cd UI
+                docker build -t UI .
+                cd -
+                cd auth
+                docker build -t auth .
+                cd -
+                cd weather
+                docker build -t weather .
+                
+                
                 ls 
                 pwd
                 '''
