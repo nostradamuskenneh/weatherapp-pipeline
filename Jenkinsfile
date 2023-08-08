@@ -54,9 +54,13 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('tag images') {
             steps {
                 sh '''
+                docker tag db oumarkenneh/db
+                docker tag ui oumarkenneh/ui
+                docker tag auth oumarkenneh/auth
+                docker tag weather oumarkenneh/weather
                 ls 
                 pwd
                 '''
