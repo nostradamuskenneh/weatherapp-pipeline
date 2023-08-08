@@ -25,7 +25,7 @@ pipeline {
             }
             environment {
      CI = 'true'
-     //  scannerHome = tool 'Sonar'
+       scannerHome = tool 'Sonar'
      scannerHome='/opt/sonar-scanner'
  }
          steps{
@@ -35,12 +35,12 @@ pipeline {
                   }
               }
 
-       //    stage('Login to Docker Hub') {
-       //     steps{
-       //       sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
-       //       echo 'Login Completed'
-       //     }
-       //   }
+           stage('Login to Docker Hub') {
+            steps{
+              sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
+              echo 'Login Completed'
+            }
+          }
       stage('clone2') {
          steps {
                 sh '''
@@ -50,12 +50,12 @@ pipeline {
             }
         }
 
- //  stage('SonarQube Analysis') {
- //   def scannerHome = tool 'SonarScanner';
- //   withSonarQubeEnv() {
- //     sh "${scannerHome}/bin/sonar-scanner"
- //   }
- // }
+   stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
+    }
+  }
         stage('build') {
             steps {
                 sh '''
