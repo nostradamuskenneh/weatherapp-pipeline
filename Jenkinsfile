@@ -66,6 +66,18 @@ pipeline {
                 '''
             }
         }
+        stage('publish images') {
+            steps {
+                sh '''
+                docker push  oumarkenneh/db
+                docker push  oumarkenneh/ui
+                docker push  oumarkenneh/auth
+                docker push  oumarkenneh/weather
+                ls 
+                pwd
+                '''
+            }
+        }
     }
 
 }
