@@ -105,8 +105,7 @@ pipeline {
         tag: ""
         EOF
                        
-                          cd -
-                          cd CHARTS1
+
                           ls
                           cd weatherapp-ui/
 
@@ -117,8 +116,7 @@ pipeline {
         pullPolicy: IfNotPresent
         tag: ""
         EOF
-                         cd -
-                         cd CHARTS1
+
                          ls
                          cd weatherapp-auth/
                          ls
@@ -129,8 +127,7 @@ pipeline {
         pullPolicy: IfNotPresent
         tag: ""
         EOF
-                         cd -
-                         cd CHARTS1
+
                          ls
                          cd weatherapp-mysql/
         cat << EOF > dev-value.yaml
