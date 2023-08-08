@@ -13,8 +13,9 @@ pipeline {
              ls 
              pwd
              '''
-         }
+         }  
      }
+         stage('SonarQube analysis') {
             agent {
                 docker {
                   image 'sonarsource/sonar-scanner-cli:4.7.0'
@@ -30,9 +31,7 @@ pipeline {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
-        
-
-
+        }
            stage('Login to Docker Hub') {
             steps{
               sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
