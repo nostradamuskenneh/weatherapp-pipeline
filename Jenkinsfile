@@ -98,7 +98,7 @@ pipeline {
         cat << EOF > CHARTS1/weatherapp-weather/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-weather
+          repository: afakharany/weatherapp-weather.${BUILD_NUMBER}
           tag: ""
         EOF
 
@@ -106,21 +106,21 @@ pipeline {
         cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-ui
+          repository: afakharany/weatherapp-ui.${BUILD_NUMBER}
           tag: ""
         EOF
         ls
         cat << EOF > CHARTS1/weatherapp-auth/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-auth
+          repository: afakharany/weatherapp-auth.${BUILD_NUMBER}
           tag: ""
         EOF
         ls
         cat << EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-mysql
+          repository: afakharany/weatherapp-mysql.${BUILD_NUMBER}
           tag: ""
         EOF
         ls
