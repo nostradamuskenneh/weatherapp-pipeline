@@ -31,8 +31,8 @@ pipeline {
              script {
                 STAGE_NAME = "SonarQube Gatekeeper"
      
-                if (BRANCH_NAME == "develop") {
-                   echo "In 'develop' branch, skip."
+                if (BRANCH_NAME == "main") {
+                   echo "In 'main' branch, skip."
                 }
                 else { // this is a PR build, fail on threshold spill
                    def qualitygate = waitForQualityGate()
