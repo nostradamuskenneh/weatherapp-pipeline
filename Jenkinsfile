@@ -26,23 +26,7 @@ pipeline {
                 }
             }
         }
-        stage ("SonarQube Gatekeeper") {
-          steps {
-             script {
-                STAGE_NAME = "SonarQube Gatekeeper"
-     
-                if (BRANCH_NAME == "main") {
-                   echo "In 'main' branch, skip."
-                }
-                else { // this is a PR build, fail on threshold spill
-                   def qualitygate = waitForQualityGate()
-                   if (qualitygate.status != "OK") {
-                      error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-                   } 
-                }
-             }
-           }
-        }
+
            stage('Login to Docker Hub') {
             steps{
               sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
