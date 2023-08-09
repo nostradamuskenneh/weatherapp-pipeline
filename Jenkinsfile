@@ -78,7 +78,7 @@ pipeline {
                 pwd
                 '''
             }
- //       }
+       }
 //
  //       stage('Update  charts') {
  //           steps {
