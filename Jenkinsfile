@@ -98,34 +98,32 @@ pipeline {
         cat << EOF > CHARTS1/weatherapp-weather/dev-value.yaml
         replicaCount: 2
         image:
-            repository: afakharany/weatherapp-weather
-            tag: ""
-        EOF        
-
-        ls
+          repository: afakharany/weatherapp-weather
+          tag: ""
+        EOF
+        
         cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-ui
           tag: ""
         EOF
-
-        ls
+        
         cat << EOF > CHARTS1/weatherapp-auth/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-auth
           tag: ""
         EOF
-
-        ls
-
+        
         cat << EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-mysql
           tag: ""
         EOF
+        
+        
         git add .
         git commit -m "Jenkins automated commit"
         git push origin main
