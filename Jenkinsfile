@@ -57,10 +57,10 @@ pipeline {
         stage('  tag images') {
             steps {
                 sh '''
-                docker   tag db oumarkenneh/db
-                docker   tag ui oumarkenneh/ui
-                docker   tag auth oumarkenneh/auth
-                docker   tag weather oumarkenneh/weather
+                docker   tag db oumarkenneh/db:${BUILD_NUMBER}
+                docker   tag ui oumarkenneh/ui:${BUILD_NUMBER}
+                docker   tag auth oumarkenneh/auth:${BUILD_NUMBER}
+                docker   tag weather oumarkenneh/weather:${BUILD_NUMBER}
                 ls 
                 pwd
                 '''
@@ -69,10 +69,10 @@ pipeline {
         stage('publish images') {
             steps {
                 sh '''
-                docker push  oumarkenneh/db${BUILD_NUMBER}
-                docker push  oumarkenneh/ui${BUILD_NUMBER}
-                docker push  oumarkenneh/auth${BUILD_NUMBER}
-                docker push  oumarkenneh/weather${BUILD_NUMBER}
+                docker push  oumarkenneh/db:${BUILD_NUMBER}
+                docker push  oumarkenneh/ui:${BUILD_NUMBER}
+                docker push  oumarkenneh/auth:${BUILD_NUMBER}
+                docker push  oumarkenneh/weather:${BUILD_NUMBER}
                 ls 
                 pwd
                 '''
