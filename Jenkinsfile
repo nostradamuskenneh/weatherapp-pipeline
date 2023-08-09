@@ -80,7 +80,7 @@ pipeline {
         }
         stage('Checkout chart repo') {
             steps {
-                // Checkout code from your  repository
+                // Checkout code from your    repository
                 checkout scm
            }
         }
@@ -89,47 +89,47 @@ pipeline {
             steps {
                 script {
                     def githubToken = credentials('github-token') // Use the ID of the credential you added
-                    sh '''
+        sh '''
         git config --global user.email "kenneho@yahoo.com"
         git config --global user.name "nostradamuskenneh"
         rm -rf  CHARTS1
         git clone https://github.com/nostradamuskenneh/CHARTS1.git
          
-        cat << EOF > CHARTS1/weatherapp-weather/devvalue.yaml
+        cat << EOF > CHARTS1/weatherapp-weather/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-weather
-          tag: ""
+            repository: afakharany/weatherapp-weather
+            tag: ""
         EOF        
 
         ls
-        cat << EOF > CHARTS1/weatherapp-ui/devvalue.yaml
+        cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-ui
-        tag: ""
+          repository: afakharany/weatherapp-ui
+          tag: ""
         EOF
 
         ls
-        cat << EOF > CHARTS1/weatherapp-auth/devvalue.yaml
+        cat << EOF > CHARTS1/weatherapp-auth/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-auth
-        tag: ""
+          repository: afakharany/weatherapp-auth
+          tag: ""
         EOF
 
         ls
 
-        cat << EOF > CHARTS1/weatherapp-mysql/devvalue.yaml
+        cat << EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-mysql
-        tag: ""
+          repository: afakharany/weatherapp-mysql
+          tag: ""
         EOF
         git add .
         git commit -m "Jenkins automated commit"
         git push origin main
-                    '''
+        '''
                 }
             }
         }
