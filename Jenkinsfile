@@ -128,6 +128,10 @@ pipeline {
         git add .
         git commit -m "Jenkins automated commit"
         git push origin main
+        ls
+        pwd
+        id
+
         '''
                 }
             }
@@ -136,6 +140,7 @@ pipeline {
             steps {
                 sh '''
                 ls
+                pwd
                 '''
             }
         }
