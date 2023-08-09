@@ -54,13 +54,13 @@ pipeline {
             }
         }
 
-        stage('tag images') {
+        stage('  tag images') {
             steps {
                 sh '''
-                docker tag db oumarkenneh/db
-                docker tag ui oumarkenneh/ui
-                docker tag auth oumarkenneh/auth
-                docker tag weather oumarkenneh/weather
+                docker   tag db oumarkenneh/db
+                docker   tag ui oumarkenneh/ui
+                docker   tag auth oumarkenneh/auth
+                docker   tag weather oumarkenneh/weather
                 ls 
                 pwd
                 '''
@@ -80,8 +80,8 @@ pipeline {
         }
         stage('Checkout chart repo') {
             steps {
-                // Checkout code from your repository
-                checkout scm
+                // Checkout code from your   repository
+                checkout s  cm
             }
         }
         
@@ -90,59 +90,46 @@ pipeline {
                 script {
                     def githubToken = credentials('github-token') // Use the ID of the credential you added
                     sh '''
-                        git config --global user.email "kenneho@yahoo.com"
-                        git config --global user.name "nostradamuskenneh"
-                        rm -rf  CHARTS1
-                        git clone https://github.com/nostradamuskenneh/CHARTS1.git
-                        cd CHARTS1
-                        ls
-                        cd weatherapp-weather
+        git config --global user.email "kenneho@yahoo.com"
+        git config --global user.name "nostradamuskenneh"
+        rm -rf  CHARTS1
+        git clone https://github.com/nostradamuskenneh/CHARTS1.git
+        cd CHARTS1
+        ls
                     
-        cat << EOF > dev-value.yaml
+        cat << EOF > weatherapp-weather/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-weather
-        pullPolicy: IfNotPresent
-        tag: ""
+          repository: afakharany/weatherapp-weather
+          tag: ""
         EOF
-                       
-        cd ..
-         ls
-         cd weatherapp-ui/
-
-        cat << EOF > dev-value.yaml
+                
+        ls
+        cat << EOF > weatherapp-ui/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-ui
-        pullPolicy: IfNotPresent
-        tag: ""
+          repository: afakharany/weatherapp-ui
+          tag: ""
         EOF
 
-          ls
-          cd ..
-          cd weatherapp-auth
-          ls
-        cat << EOF > dev-value.yaml
+        ls
+        cat << EOF > weatherapp-auth/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-auth
-        pullPolicy: IfNotPresent
-        tag: ""
+          repository: afakharany/weatherapp-auth
+          tag: ""
         EOF
 
                          ls
-                         cd ..
-                         cd weatherapp-mysql/
-        cat << EOF > dev-value.yaml
+        cat << EOF > weatherapp-mysql/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-mysql
-        pullPolicy: IfNotPresent
-        tag: ""
+          repository: afakharany/weatherapp-mysql
+          tag: ""
         EOF
-                        git add .
-                        git commit -m "Jenkins automated commit"
-                        git push origin main
+        git add .
+        git commit -m "Jenkins automated commit"
+        git push origin main
                     '''
                 }
             }
