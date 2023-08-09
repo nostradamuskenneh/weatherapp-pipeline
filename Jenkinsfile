@@ -188,14 +188,16 @@ pipeline {
     }
 
 
-        post {
-            always {
-                // Send a Slack notification after the build completes (success or failure)
+    post {
+        always {
+            // Send a Slack notification after the build completes (success or failure)
+            script {
                 slackSend(
                     color: currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'good' : 'danger',
                     message: "Build Status: ${currentBuild.currentResult} \nJob Name: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
-                    channel: '#dev-lions',  // Replace with the desired Slack channel
-                    tokenCredentialId: 'slack-jenkins-token-ID'  // Replace with your Jenkins credential ID for Slack token
+                    channel: '#dev-lions',
+                    tokenCredentialId: 'slack-jenkins-token-ID'
                 )
             }
         }
+    }
