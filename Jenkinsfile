@@ -79,28 +79,14 @@ pipeline {
                 '''
             }
         }
-       // stage('Checkout chart repo') {
-       //     steps {
-                // Checkout code from your repository
-       //         checkout scm
-           }
-        }
-        
-        stage('Push to GitHub') {
-            steps {
-      //          script {
-      //              def githubToken = credentials('github-token') // Use the ID of the credential you added
-        sh '''
-        git config --global user.email "kenneho@yahoo.com"
-        git config --global user.name "nostradamuskenneh"
-        rm -rf  CHARTS1
-        git clone git@github.com:nostradamuskenneh/CHARTS1.git
-        ls  
 
-        cd CHARTS1
-        ls
-        pwd
-        ls
+        stage('Update  charts') {
+            steps {
+                script {
+
+                    sh '''
+        rm -rf  CHARTS1 || true
+        git clone git@github.com:nostradamuskenneh/CHARTS1.git
         cat <<-EOF > weatherapp-auth/dev-value.yaml
         image:
           repository: oumarkenneh/auth
@@ -147,9 +133,10 @@ pipeline {
         id
 
         '''
+                    
                 }
             }
-    //    }
+        }
 
 
 
