@@ -94,15 +94,14 @@ pipeline {
         git config --global user.name "nostradamuskenneh"
         rm -rf  CHARTS1
         git clone https://github.com/nostradamuskenneh/CHARTS1.git
-        cd CHARTS1          
+         
         cat << EOF > CHARTS1/weatherapp-weather/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-weather
           tag: ""
         EOF        
-        ls
-        cd CHARTS1
+
         ls
         cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
         replicaCount: 2
