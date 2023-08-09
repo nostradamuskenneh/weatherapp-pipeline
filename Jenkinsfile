@@ -80,9 +80,9 @@ pipeline {
         }
         stage('Checkout chart repo') {
             steps {
-                // Checkout code from your   repository
+                // Checkout code from your  repository
                 checkout scm
-            }
+           }
         }
         
         stage('Push to GitHub') {
@@ -100,32 +100,38 @@ pipeline {
         cat << EOF > weatherapp-weather/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-weather
-          tag: ""
+        repository: afakharany/weatherapp-weather
+        tag: ""
         EOF
                 
+        ls
+        cd CHARTS1
         ls
         cat << EOF > weatherapp-ui/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-ui
-          tag: ""
+        repository: afakharany/weatherapp-ui
+        tag: ""
         EOF
 
+        ls
+        cd CHARTS1
         ls
         cat << EOF > weatherapp-auth/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-auth
-          tag: ""
+        repository: afakharany/weatherapp-auth
+        tag: ""
         EOF
 
-                         ls
+        ls
+        cd CHARTS1
+        ls
         cat << EOF > weatherapp-mysql/dev-value.yaml
         replicaCount: 2
         image:
-          repository: afakharany/weatherapp-mysql
-          tag: ""
+        repository: afakharany/weatherapp-mysql
+        tag: ""
         EOF
         git add .
         git commit -m "Jenkins automated commit"
