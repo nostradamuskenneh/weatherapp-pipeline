@@ -188,16 +188,16 @@ pipeline {
     }
 
 
-    post {
-        always {
-            // Send a Slack notification after the build completes (success or failure)
-            script {
-                slackSend(
-                    color: currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'good' : 'danger',
-                    message: "Build Status: ${currentBuild.currentResult} \nJob Name: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
-                    channel: '#dev-lions',
-                    tokenCredentialId: 'slack-jenkins-token-ID'
-                )
-            }
-        }
-    }
+   // post {
+   //     always {
+   //         // Send a Slack notification after the build completes (success or failure)
+   //         script {
+   //             slackSend(
+   //                 color: currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'good' : 'danger',
+   //                 message: "Build Status: ${currentBuild.currentResult} \nJob Name: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
+   //                 channel: '#dev-lions',
+   //                 tokenCredentialId: 'slack-jenkins-token-ID'
+   //             )
+   //         }
+   //     }
+   // }
