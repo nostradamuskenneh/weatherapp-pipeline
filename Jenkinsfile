@@ -100,9 +100,10 @@ pipeline {
         cat << EOF > weatherapp-weather/dev-value.yaml
         replicaCount: 2
         image:
-        repository: afakharany/weatherapp-weather
-        tag: ""
+          repository: afakharany/weatherapp-weather
+          tag: ""
         EOF
+
                 
         ls
         cd CHARTS1
