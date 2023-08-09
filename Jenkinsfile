@@ -95,7 +95,7 @@ pipeline {
         rm -rf  CHARTS1
         git clone https://github.com/nostradamuskenneh/CHARTS1.git
          
-        cat << EOF > CHARTS1/weatherapp-weather/dev-value.yaml
+        cat << EOF > CHARTS1/weatherapp-weather/devvalue.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-weather
@@ -103,7 +103,7 @@ pipeline {
         EOF        
 
         ls
-        cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
+        cat << EOF > CHARTS1/weatherapp-ui/devvalue.yaml
         replicaCount: 2
         image:
         repository: afakharany/weatherapp-ui
@@ -111,9 +111,7 @@ pipeline {
         EOF
 
         ls
-        cd CHARTS1
-        ls
-        cat << EOF > CHARTS1/weatherapp-auth/dev-value.yaml
+        cat << EOF > CHARTS1/weatherapp-auth/devvalue.yaml
         replicaCount: 2
         image:
         repository: afakharany/weatherapp-auth
@@ -121,9 +119,8 @@ pipeline {
         EOF
 
         ls
-        cd CHARTS1
-        ls
-        cat << EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
+
+        cat << EOF > CHARTS1/weatherapp-mysql/devvalue.yaml
         replicaCount: 2
         image:
         repository: afakharany/weatherapp-mysql
