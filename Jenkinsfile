@@ -101,6 +101,7 @@ pipeline {
           repository: afakharany/weatherapp-weather
           tag: ""
         EOF
+
         
         cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
         replicaCount: 2
