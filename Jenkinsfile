@@ -81,7 +81,7 @@ pipeline {
         stage('Checkout chart repo') {
             steps {
                 // Checkout code from your   repository
-                checkout s  cm
+                checkout scm
             }
         }
         
