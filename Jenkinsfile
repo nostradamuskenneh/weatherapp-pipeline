@@ -95,36 +95,46 @@ pipeline {
         rm -rf  CHARTS1
         git clone https://github.com/nostradamuskenneh/CHARTS1.git
         ls  
+
         cd CHARTS1
-        cd weatherapp-weather/
         ls
-        cat <<-EOF > dev-value.yaml
-        replicaCount: 2
+        pwd
+        ls
+        cat <<-EOF > weatherapp-auth/dev-value.yaml
         image:
-          repository: afakharany/weatherapp-weather${BUILD_NUMBER}
-          tag: "${BUILD_NUMBER}"
+          repository: oumarkenneh/auth
+          tag: ${BUILD_NUMBER}
         EOF
 
         ls
-        cat <<-EOF > CHARTS1/weatherapp-ui/dev-value.yaml
-        replicaCount: 2
+        cd CHARTS1
+        ls
+        pwd
+        ls
+        cat <<-EOF > weatherapp-mysql/dev-value.yaml
         image:
-          repository: afakharany/weatherapp-ui${BUILD_NUMBER}
-          tag: "${BUILD_NUMBER}"
+          repository: oumarkenneh/db
+          tag: ${BUILD_NUMBER}
         EOF
         ls
-        cat <<-EOF > CHARTS1/weatherapp-auth/dev-value.yaml
-        replicaCount: 2
+        cd CHARTS1
+        ls
+        pwd
+        ls
+        cat <<-EOF > weatherapp-weather/dev-value.yaml
         image:
-          repository: afakharany/weatherapp-auth{BUILD_NUMBER}
-          tag: "${BUILD_NUMBER}"
+          repository: oumarkenneh/weather
+          tag: ${BUILD_NUMBER}
         EOF
         ls
-        cat <<-EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
-        replicaCount: 2
+        cd CHARTS1
+        ls
+        pwd
+        ls
+        cat <<-EOF > weatherapp-ui/dev-value.yaml
         image:
-          repository: afakharany/weatherapp-mysql${BUILD_NUMBER}
-          tag: "${BUILD_NUMBER}"
+          repository: oumarkenneh/ui
+          tag: ${BUILD_NUMBER}
         EOF
         ls
         cd CHARTS1
