@@ -98,7 +98,7 @@ pipeline {
         cd CHARTS1
         cd weatherapp-weather/
         ls
-        cat << EOF > dev-value.yaml
+        cat <<-EOF > dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-weather${BUILD_NUMBER}
@@ -106,21 +106,21 @@ pipeline {
         EOF
 
         ls
-        cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
+        cat <<-EOF > CHARTS1/weatherapp-ui/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-ui${BUILD_NUMBER}
           tag: "${BUILD_NUMBER}"
         EOF
         ls
-        cat << EOF > CHARTS1/weatherapp-auth/dev-value.yaml
+        cat <<-EOF > CHARTS1/weatherapp-auth/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-auth{BUILD_NUMBER}
           tag: "${BUILD_NUMBER}"
         EOF
         ls
-        cat << EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
+        cat <<-EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-mysql${BUILD_NUMBER}
@@ -140,35 +140,7 @@ pipeline {
             }
         }
 
-        stage('Update File') {
-            steps {
-                script {
-                    def githubToken = credentials('github-token') // Use the ID of the GitHub token credential
-                    
-                    def repoOwner = 'nostradamuskenneh'
-                    def repoName = 'CHARTS1'
-                    def filePath = 'weatherapp-weather/dev-value.yaml'
-                    def commitMessage = 'Update file via Jenkins'
-                    def newFileContent = "${BUILD_NUMBER}"
-                    
-                    def apiUrl = "https://github.com/nostradamuskenneh/CHARTS1.git"
-                    
-                    def response = httpRequest(
-                        authentication: githubToken,
-                        contentType: 'APPLICATION_JSON',
-                        httpMode: 'PATCH',
-                        url: apiUrl,
-                        requestBody: [
-                            message: commitMessage,
-                            content: newFileContent.encodeBase64(),
-                            sha: 'SHA-of-the-existing-file'
-                        ]
-                    )
-                    
-                    echo "File updated with response: ${response}"
-                }
-            }
-        }
+
 
         stage('update weatherapp-weather') {
             steps {
