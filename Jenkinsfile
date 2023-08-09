@@ -102,28 +102,28 @@ pipeline {
           tag: ""
         EOF
 
-        
+        ls
         cat << EOF > CHARTS1/weatherapp-ui/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-ui
           tag: ""
         EOF
-        
+        ls
         cat << EOF > CHARTS1/weatherapp-auth/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-auth
           tag: ""
         EOF
-        
+        ls
         cat << EOF > CHARTS1/weatherapp-mysql/dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-mysql
           tag: ""
         EOF
-        
+        ls
         cd CHARTS1
         git add .
         git commit -m "Jenkins automated commit"
