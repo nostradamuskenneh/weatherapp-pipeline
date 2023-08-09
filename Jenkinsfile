@@ -123,7 +123,7 @@ pipeline {
           tag: ""
         EOF
         
-        
+        cd CHARTS1
         git add .
         git commit -m "Jenkins automated commit"
         git push origin main
