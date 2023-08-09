@@ -96,8 +96,9 @@ pipeline {
         git clone https://github.com/nostradamuskenneh/CHARTS1.git
         ls
         cd CHARTS1
+        cd weatherapp-weather/
         ls
-        cat << EOF > weatherapp-weather/dev-value.yaml
+        cat << EOF > dev-value.yaml
         replicaCount: 2
         image:
           repository: afakharany/weatherapp-weather${BUILD_NUMBER}
