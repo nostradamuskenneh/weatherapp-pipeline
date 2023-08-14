@@ -81,65 +81,36 @@ pipeline {
                 '''
             }
        }
-       stage('Update  charts') {
-           steps {
-                      script {
-            sh '''
-              
-               rm -rf  CHARTS1 || true
-               git clone git@github.com:nostradamuskenneh/CHARTS1.git
-               pwd
-               ls
-               rm -rf .git
-              #!/bin/bash
-              cat << EOF >>  CHARTS1/weatherapp-auth/dev-value.yaml
-              image:
-                repository: oumarkenneh/auth
-                tag:${BUILD_NUMBER}
-              EOF
-              ls
-              cd CHARTS1
-              ls
-              pwd
-              ls
-              #!/bin/bash
-              cat << EOF >> CHARTS1/weatherapp-mysql/dev-value.yaml
-              image:
-                repository: oumarkenneh/db
-                tag:${BUILD_NUMBER}
-              EOF
-              ls
-              cd CHARTS1
-              ls
-              pwd
-              ls
-              #!/bin/bash
-              cat << EOF >> CHARTS1/weatherapp-weather/dev-value.yaml
-              image: 
-                repository: oumarkenneh/weather
-                tag:${BUILD_NUMBER}
-              EOF
-              ls
-              pwd
-              ls
-              #!/bin/bash
-              cat << EOF >> CHARTS1/weatherapp-ui/dev-value.yaml
-              image:
-                repository: oumarkenneh/ui
-                tag:${BUILD_NUMBER}
-              EOF
-              ls
-              git add .
-              git commit -m "Jenkins automated commit"
-              git push origin main
-              ls
-              pwd
-              id
-            '''
-                   
-               }
-           }
-       }
+        stage('Build') {
+            steps {
+                script {
+                    sh '''
+                        rm -rf  CHARTS1 || true
+                        git clone git@github.com:nostradamuskenneh/CHARTS1.git
+                        cd CHARTS1
+                        echo "image: 
+                                repository: oumarkenneh/auth
+                                tag:${BUILD_NUMBER}" > weatherapp-auth/dev-value.yaml
+                        echo "image: 
+                                repository: oumarkenneh/db
+                                tag:${BUILD_NUMBER}" > weatherapp-mysql/dev-value.yaml
+                        echo "image: 
+                                repository: oumarkenneh/weather
+                                tag:${BUILD_NUMBER}" > weatherapp-weather/dev-value.yaml
+                        echo "image: 
+                                repository: oumarkenneh/ui
+                                tag:${BUILD_NUMBER}" > weatherapp-ui/dev-value.yaml
+                        git add .
+                        git commit -m "Jenkins automated commit"
+                        git push origin main
+                        ls
+                        pwd
+                        id
+
+                    '''
+                }
+            }
+        }
 
         stage('update weatherapp-weather') {
             steps {
