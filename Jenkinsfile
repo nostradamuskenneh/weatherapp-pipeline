@@ -79,128 +79,60 @@ pipeline {
                 '''
             }
        }
-//
- //       stage('Update  charts') {
- //           steps {
- //               script {
-//
- //                   sh '''
- //       rm -rf  CHARTS1 || true
- //       git clone git@github.com:nostradamuskenneh/CHARTS1.git
- //       cat <<-EOF > weatherapp-auth/dev-value.yaml
- //       image:
- //         repository: oumarkenneh/auth
- //         tag: ${BUILD_NUMBER}
- //       EOF
-//
- //       ls
- //       cd CHARTS1
- //       ls
- //       pwd
- //       ls
- //       cat <<-EOF > weatherapp-mysql/dev-value.yaml
- //       image:
- //         repository: oumarkenneh/db
- //         tag: ${BUILD_NUMBER}
- //       EOF
- //       ls
- //       cd CHARTS1
- //       ls
- //       pwd
- //       ls
- //       cat <<-EOF > weatherapp-weather/dev-value.yaml
- //       image:
- //         repository: oumarkenneh/weather
- //         tag: ${BUILD_NUMBER}
- //       EOF
- //       ls
- //       cd CHARTS1
- //       ls
- //       pwd
- //       ls
- //       cat <<-EOF > weatherapp-ui/dev-value.yaml
- //       image:
- //         repository: oumarkenneh/ui
- //         tag: ${BUILD_NUMBER}
- //       EOF
- //       ls
- //       cd CHARTS1
- //       git add .
- //       git commit -m "Jenkins automated commit"
- //       git push origin main
- //       ls
- //       pwd
- //       id
-//
- //       '''
- //                   
- //               }
- //           }
- //       }
-
-        // stage('github') {
-          //  steps {
-            //    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'git@github.com:nostradamuskenneh/CHARTS1.git']]])
-           // }
-       // }
-     //   stage('Make Changes') {
-     //       steps {
-     //           script {
-    //                // Add your build and change-making steps here
-    //            }
-   //         }
-   //     }
-        stage('Push Changes') {
-            steps {
-                script {
-                    def gitUser = credentials('staticgitkey')
-                    withCredentials([sshUserPrivateKey(credentialsId: gitUser, keyFileVariable: 'SSH_KEY')]) {
-                        sh '''
-                            
-                            git config --global user.email "kenneho@yahoo.com"
-                            git config --global user.name "nostradamuskenneh"
-                            eval $(ssh-agent -s)
-                            ssh-add $SSH_KEY
-                            git clone git@github.com:nostradamuskenneh/CHARTS1.git
-                            git add .
-                            git commit -m "Jenkins pipeline update"
-                            git push origin main
-                        '''
-                    }
-                }
-            }
-        }
-    
-
-
-
-        stage('Clone Repository') {
-            steps {
-                script {
-                    // Clone the repository
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'git@github.com:nostradamuskenneh/CHARTS1.git']]])
-                }
-            }
-        }
-        
-        stage('Create File and Push') {
-            steps {
-                script {
-                    // Create a new file
-                    writeFile file: 'newfile.txt', text: 'Hello, World!'
-                    
-                    // Add and commit changes
-                    sh 'git add newfile.txt'
-                    sh 'git commit -m "Add newfile.txt"'
-                    
-                    // Push changes to GitHub
-                    sh 'git push origin master'
-                }
-            }
-        }
-    
-
-
+       stage('Update  charts') {
+           steps {
+               script {
+                   sh '''
+       rm -rf  CHARTS1 || true
+       git clone git@github.com:nostradamuskenneh/CHARTS1.git
+       cat <<-EOF > weatherapp-auth/dev-value.yaml
+       image:
+         repository: oumarkenneh/auth
+         tag: ${BUILD_NUMBER}
+       EOF
+       ls
+       cd CHARTS1
+       ls
+       pwd
+       ls
+       cat <<-EOF > weatherapp-mysql/dev-value.yaml
+       image:
+         repository: oumarkenneh/db
+         tag: ${BUILD_NUMBER}
+       EOF
+       ls
+       cd CHARTS1
+       ls
+       pwd
+       ls
+       cat <<-EOF > weatherapp-weather/dev-value.yaml
+       image:
+         repository: oumarkenneh/weather
+         tag: ${BUILD_NUMBER}
+       EOF
+       ls
+       cd CHARTS1
+       ls
+       pwd
+       ls
+       cat <<-EOF > weatherapp-ui/dev-value.yaml
+       image:
+         repository: oumarkenneh/ui
+         tag: ${BUILD_NUMBER}
+       EOF
+       ls
+       cd CHARTS1
+       git add .
+       git commit -m "Jenkins automated commit"
+       git push origin main
+       ls
+       pwd
+       id
+       '''
+                   
+               }
+           }
+       }
 
         stage('update weatherapp-weather') {
             steps {
