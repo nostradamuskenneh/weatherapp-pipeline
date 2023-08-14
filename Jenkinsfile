@@ -89,8 +89,7 @@ pipeline {
        git clone git@github.com:nostradamuskenneh/CHARTS1.git
        pwd
        ls
-       cd CHARTS1 || true
-       cat << EOF >> weatherapp-auth/dev-value.yaml
+       cat << EOF >>  CHARTS1/weatherapp-auth/dev-value.yaml
        image:
          repository: oumarkenneh/auth
          tag:${BUILD_NUMBER}
@@ -100,7 +99,7 @@ pipeline {
        ls
        pwd
        ls
-       cat << EOF >> weatherapp-mysql/dev-value.yaml
+       cat << EOF >> CHARTS1/weatherapp-mysql/dev-value.yaml
        image:
          repository: oumarkenneh/db
          tag:${BUILD_NUMBER}
@@ -110,17 +109,15 @@ pipeline {
        ls
        pwd
        ls
-       cat << EOF >> weatherapp-weather/dev-value.yaml
+       cat << EOF >> CHARTS1/weatherapp-weather/dev-value.yaml
        image: 
          repository: oumarkenneh/weather
          tag:${BUILD_NUMBER}
        EOF
        ls
-       cd CHARTS1
-       ls
        pwd
        ls
-       cat << EOF >> weatherapp-ui/dev-value.yaml
+       cat << EOF >> CHARTS1/weatherapp-ui/dev-value.yaml
        image:
          repository: oumarkenneh/ui
          tag:${BUILD_NUMBER}
