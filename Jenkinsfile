@@ -86,10 +86,10 @@ pipeline {
                       script {
             sh '''
               
-              rm -rf  CHARTS1 || true
-              git clone git@github.com:nostradamuskenneh/CHARTS1.git
-              pwd
-              ls
+               rm -rf  CHARTS1 || true
+               git clone git@github.com:nostradamuskenneh/CHARTS1.git
+               pwd
+               ls
               #!/bin/bash
               cat << EOF >>  CHARTS1/weatherapp-auth/dev-value.yaml
               image:
