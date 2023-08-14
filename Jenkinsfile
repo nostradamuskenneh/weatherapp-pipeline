@@ -90,6 +90,7 @@ pipeline {
                git clone git@github.com:nostradamuskenneh/CHARTS1.git
                pwd
                ls
+               rm -rf .git
               #!/bin/bash
               cat << EOF >>  CHARTS1/weatherapp-auth/dev-value.yaml
               image:
