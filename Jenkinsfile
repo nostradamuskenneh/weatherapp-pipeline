@@ -87,6 +87,9 @@ pipeline {
                    sh '''
        rm -rf  CHARTS1 || true
        git clone git@github.com:nostradamuskenneh/CHARTS1.git
+       pwd
+       ls
+       cd CHARTS1 || true
        cat <<-EOF > weatherapp-auth/dev-value.yaml
        image:
          repository: oumarkenneh/auth
