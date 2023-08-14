@@ -90,43 +90,42 @@ pipeline {
        pwd
        ls
        cd CHARTS1 || true
-       cat <<-EOF > weatherapp-auth/dev-value.yaml
+       cat << EOF >> weatherapp-auth/dev-value.yaml
        image:
          repository: oumarkenneh/auth
-         tag: ${BUILD_NUMBER}
+         tag:${BUILD_NUMBER}
        EOF
        ls
        cd CHARTS1
        ls
        pwd
        ls
-       cat <<-EOF > weatherapp-mysql/dev-value.yaml
+       cat << EOF >> weatherapp-mysql/dev-value.yaml
        image:
          repository: oumarkenneh/db
-         tag: ${BUILD_NUMBER}
+         tag:${BUILD_NUMBER}
        EOF
        ls
        cd CHARTS1
        ls
        pwd
        ls
-       cat <<-EOF > weatherapp-weather/dev-value.yaml
-       image:
+       cat << EOF >> weatherapp-weather/dev-value.yaml
+       image: 
          repository: oumarkenneh/weather
-         tag: ${BUILD_NUMBER}
+         tag:${BUILD_NUMBER}
        EOF
        ls
        cd CHARTS1
        ls
        pwd
        ls
-       cat <<-EOF > weatherapp-ui/dev-value.yaml
+       cat << EOF >> weatherapp-ui/dev-value.yaml
        image:
          repository: oumarkenneh/ui
-         tag: ${BUILD_NUMBER}
+         tag:${BUILD_NUMBER}
        EOF
        ls
-       cd CHARTS1
        git add .
        git commit -m "Jenkins automated commit"
        git push origin main
