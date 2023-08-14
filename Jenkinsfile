@@ -143,13 +143,13 @@ pipeline {
             //    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'git@github.com:nostradamuskenneh/CHARTS1.git']]])
            // }
        // }
-        stage('Make Changes') {
-            steps {
-                script {
-                    // Add your build and change-making steps here
-                }
-            }
-        }
+     //   stage('Make Changes') {
+     //       steps {
+     //           script {
+    //                // Add your build and change-making steps here
+    //            }
+   //         }
+   //     }
         stage('Push Changes') {
             steps {
                 script {
