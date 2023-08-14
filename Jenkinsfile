@@ -138,6 +138,39 @@ pipeline {
  //           }
  //       }
 
+        stage('github') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'git@github.com:nostradamuskenneh/CHARTS1.git']]])
+            }
+        }
+        stage('Make Changes') {
+            steps {
+                script {
+                    // Add your build and change-making steps here
+                }
+            }
+        }
+        stage('Push Changes') {
+            steps {
+                script {
+                    def gitUser = credentials('staticgitkey')
+                    withCredentials([sshUserPrivateKey(credentialsId: gitUser, keyFileVariable: 'SSH_KEY')]) {
+                        sh '''
+                            git config --global user.email "kenneho@yahoo.com"
+                            git config --global user.name "nostradamuskenneh"
+                            eval $(ssh-agent -s)
+                            ssh-add $SSH_KEY
+                            git add .
+                            git commit -m "Jenkins pipeline update"
+                            git push origin main
+                        '''
+                    }
+                }
+            }
+        }
+    
+
+
 
         stage('Clone Repository') {
             steps {
