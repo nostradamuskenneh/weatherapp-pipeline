@@ -147,8 +147,8 @@ pipeline {
     
 
 
-
-     post {
+    }
+    post {
         always {
             // Send a Slack notification after the build completes (success or failure)
             script {
@@ -161,5 +161,5 @@ pipeline {
             }
        }
     }
-  }
+  
 }
