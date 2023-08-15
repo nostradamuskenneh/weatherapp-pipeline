@@ -11,7 +11,7 @@ pipeline {
              '''
          }  
      }
-         stage('SonarQube analysis') {
+     stage('SonarQube analysis') {
             agent {
                 docker {
                   image 'sonarsource/sonar-scanner-cli:4.7.0'
@@ -22,7 +22,7 @@ pipeline {
         //  scannerHome = tool 'Sonar'
         scannerHome='/opt/sonar-scanner'
     }
-            steps{
+       steps{
                 withSonarQubeEnv('Sonar') {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
@@ -37,6 +37,7 @@ pipeline {
                     }
                 }
             }
+         
      }
 
      stage('Docker-Login') {
