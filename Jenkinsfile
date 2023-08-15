@@ -164,7 +164,7 @@ pipeline {
         }
     }
 
-    start {
+     start {
         // Send a Slack notification when the build starts
         script {
             slackSend(
