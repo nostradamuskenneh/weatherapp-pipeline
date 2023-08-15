@@ -29,14 +29,14 @@ pipeline {
             }
         }
 
-       stage('Login to Docker Hub') {
-           steps {
-               withCredentials([string(credentialsId: 'DOCKERHUB_CREDENTIALS', variable: 'DOCKER_PASSWORD')]) {
-                   sh "echo \$DOCKER_PASSWORD | docker login -u oumarkenneh --password-stdin"
-               }
-               echo 'Login Completed'
-           }
-       }
+      stage('Login to Docker Hub') {
+         steps {
+                withCredentials([string(credentialsId: 'Dokerhub', variable: 'DOCKER_PASSWORD')]) {
+                    sh "echo \$DOCKER_PASSWORD | docker login -u oumarkenneh --password-stdin"
+                }
+                echo 'Login Completed'
+            }
+      }
       stage('Build-DB-AUTH-UI-WEATHER') {
          steps {
                 sh '''
