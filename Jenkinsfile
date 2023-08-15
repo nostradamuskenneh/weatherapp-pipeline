@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'node'
     }
+  environment {   
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
     stages {
       stage('clone') {
          steps {
@@ -28,35 +31,22 @@ pipeline {
                 }
             }
         }
+    stage('Login') {
 
-        stage('List Credentials') {
-            steps {
-                script {
-                    def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
-                        com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials.class,
-                        Jenkins.instance
-                    )
-
-                    creds.each { credential ->
-                        echo "ID: ${Dokerhub}"
-                        echo "Username: ${credential.username}"
-                        echo "Description: ${credential.description}"
-                        echo "-----got----------it--------------"
-                    }
-                }
-            }
-        }
-
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
     
     
-      stage('Login to Docker Hub') {
-         steps {
-                withCredentials([string(credentialsId: 'Dokerhub', variable: 'DOCKER_PASSWORD')]) {
-                    sh "echo \$DOCKER_PASSWORD | docker login -u oumarkenneh --password-stdin"
-                }
-                echo 'Login Completed'
-            }
-      }
+   //   stage('Login to Docker Hub') {
+   //      steps {
+   //             withCredentials([string(credentialsId: 'Dokerhub', variable: 'DOCKER_PASSWORD')]) {
+   //                 sh "echo \$DOCKER_PASSWORD | docker login -u oumarkenneh --password-stdin"
+    //            }
+    //            echo 'Login Completed'
+    //        }
+   //   }
       stage('Build-DB-AUTH-UI-WEATHER') {
          steps {
                 sh '''
