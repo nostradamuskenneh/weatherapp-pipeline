@@ -47,7 +47,7 @@ pipeline {
             }
         }
 
-    }
+    
     
       stage('Login to Docker Hub') {
          steps {
@@ -166,6 +166,8 @@ pipeline {
         '''
             }
         }
+      
+    }
 
     post {
         always {
@@ -193,5 +195,3 @@ pipeline {
     }
 
 }
-  
-
