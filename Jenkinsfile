@@ -88,67 +88,9 @@ pipeline {
                         rm -rf  CHARTS1 || true
                         git clone git@github.com:nostradamuskenneh/CHARTS1.git
                         cd CHARTS1
-#!/bin/bash
-
-cat << EOF > weatherapp-auth/dev-value.yaml
-replicaCount: {{ .Values.replicaCount }}
-
-image:
-  repository: oumarkenneh/auth
-  pullPolicy: {{ .Values.image.pullPolicy }}
-  tag: '${BUILD_NUMBER}'
-
-imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 2 }}
-
-nameOverride: {{ .Values.nameOverride | default "" }}
-fullnameOverride: {{ .Values.fullnameOverride | default "" }}
-
-serviceAccount:
-  create: {{ .Values.serviceAccount.create }}
-  annotations: {{ toYaml .Values.serviceAccount.annotations | nindent 4 }}
-  name: {{ .Values.serviceAccount.name | default "" }}
-
-podAnnotations: {{ toYaml .Values.podAnnotations | nindent 2 }}
-
-podSecurityContext: {{ toYaml .Values.podSecurityContext | nindent 2 }}
-
-securityContext: {{ toYaml .Values.securityContext | nindent 2 }}
-
-service:
-  type: {{ .Values.service.type }}
-  port: {{ .Values.service.port }}
-
-ingress:
-  enabled: {{ .Values.ingress.enabled }}
-  className: {{ .Values.ingress.className | default "" }}
-  annotations: {{ toYaml .Values.ingress.annotations | nindent 4 }}
-  hosts:
-{{- range .Values.ingress.hosts }}
-    - host: {{ .host | default "chart-example.local" }}
-      paths:
-{{- range .paths }}
-        - path: {{ .path | default "/" }}
-          pathType: {{ .pathType | default "ImplementationSpecific" }}
-{{- end }}
-{{- end }}
-  tls: []
-
-resources: {{ toYaml .Values.resources | nindent 2 }}
-
-autoscaling:
-  enabled: {{ .Values.autoscaling.enabled }}
-  minReplicas: {{ .Values.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
-  targetCPUUtilizationPercentage: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
-
-nodeSelector: {{ toYaml .Values.nodeSelector | nindent 2 }}
-
-tolerations: {{ toYaml .Values.tolerations | nindent 2 }}
-
-affinity: {{ toYaml .Values.affinity | nindent 2 }}
-EOF
-
-chmod 777 weatherapp-auth/dev-value.yaml
+                        echo "image: 
+                                repository: oumarkenneh/auth
+                                tag:${BUILD_NUMBER}" >  weatherapp-auth/dev-value.yaml
 
                         echo "image: 
                                 repository: oumarkenneh/db
