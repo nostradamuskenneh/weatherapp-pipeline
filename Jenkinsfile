@@ -92,9 +92,9 @@ echo
        " replicaCount: {{ .Values.replicaCount }} 
         
         image:
-          repository: {{ .Values.image.repository }}
+          repository: oumarkenneh/auth
           pullPolicy: {{ .Values.image.pullPolicy }}
-          tag: {{ .Values.image.tag | default "" }}
+          tag:${BUILD_NUMBER}
         
         imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 2 }}
         
