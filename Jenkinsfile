@@ -28,17 +28,18 @@ pipeline {
                 }
             }
         }
-    stage('Quality Gate') {
-      steps {
-        script {
-          def qualityGateStatus = waitForQualityGate()
-          if (qualityGateStatus != 'OK') {
-            error("Quality gate failed")
-          }
-        }
-      }
-    }
-
+     stage('Wait for Quality Gate') {
+       steps {
+         timeout(time: 5, unit: 'MINUTES') {
+           script {
+             def qualityGateStatus = waitForQualityGate()
+             if (qualityGateStatus != "OK") {
+               error "Quality gate did not pass: ${qualityGateStatus}"
+             }
+           }
+         }
+       }
+     }
      stage('Docker-Login') {
        steps {
          withCredentials([usernamePassword(credentialsId: 'Dokerhub', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
