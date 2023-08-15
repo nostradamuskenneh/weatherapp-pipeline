@@ -161,20 +161,20 @@ pipeline {
                     tokenCredentialId: 'slack-jenkins-token-ID'
                 )
             }
-        }
-    }
-
-     start {
+        start {
         // Send a Slack notification when the build starts
-        script {
-            slackSend(
-                color: 'good',
-                message: "Build Started: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
-                channel: '#dev-lions',
-                tokenCredentialId: 'slack-jenkins-token-ID'
+            script {
+                slackSend(
+                    color: 'good',
+                    message: "Build Started: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
+                    channel: '#dev-lions',
+                    tokenCredentialId: 'slack-jenkins-token-ID'
             )
         }
     }
+        }
+    }
+
 }
   
 
