@@ -37,7 +37,7 @@ pipeline {
                echo 'Login Completed'
            }
        }
-      stage('Build DB, AUTH, UI, WEATHER') {
+      stage('Build-DB-AUTH-UI-WEATHER') {
          steps {
                 sh '''
                 cd DB
@@ -161,7 +161,20 @@ pipeline {
                     tokenCredentialId: 'slack-jenkins-token-ID'
                 )
             }
-       }
+        }
     }
+
+    start {
+        // Send a Slack notification when the build starts
+        script {
+            slackSend(
+                color: 'good',
+                message: "Build Started: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
+                channel: '#dev-lions',
+                tokenCredentialId: 'slack-jenkins-token-ID'
+            )
+        }
+    }
+}
   
 }
