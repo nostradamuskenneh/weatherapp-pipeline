@@ -29,13 +29,15 @@ pipeline {
             }
         }
 
-           stage('Login to Docker Hub') {
-            steps{
-              sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
-              echo 'Login Completed'
-            }
-          }
-      stage('Build DB') {
+      stage('Login to Docker Hub') {
+        steps {
+             withCredentials([string(credentialsId: 'Dokerhub', variable: 'Dokerhub')]) {
+                  sh "echo \$Dokerhub | docker login -u oumarkenneh --password-stdin"
+             }
+             echo 'Login Completed'
+        }
+      }
+      stage('Build DB, AUTH, UI, WEATHER') {
          steps {
                 sh '''
                 cd DB
@@ -81,7 +83,7 @@ pipeline {
                 '''
             }
        }
-        stage('Build') {
+        stage('Update-and-push-to-github') {
             steps {
                 script {
                     sh '''
