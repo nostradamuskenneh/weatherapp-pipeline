@@ -2,9 +2,6 @@ pipeline {
     agent {
         label 'node'
     }
-  environment {   
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	}
     stages {
       stage('clone') {
          steps {
@@ -31,23 +28,14 @@ pipeline {
                 }
             }
         }
-    stage('Login') {
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
-    
-    
-   //   stage('Login to Docker Hub') {
-   //      steps {
-   //             withCredentials([string(credentialsId: 'Dokerhub', variable: 'DOCKER_PASSWORD')]) {
-   //                 sh "echo \$DOCKER_PASSWORD | docker login -u oumarkenneh --password-stdin"
-    //            }
-    //            echo 'Login Completed'
-    //        }
-   //   }
-      stage('Build-DB-AUTH-UI-WEATHER') {
+           stage('Login to Docker Hub') {
+            steps{
+              sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
+              echo 'Login Completed'
+            }
+          }
+      stage('Build DB') {
          steps {
                 sh '''
                 cd DB
@@ -93,7 +81,7 @@ pipeline {
                 '''
             }
        }
-        stage('Update-and-push-to-github') {
+        stage('Build') {
             steps {
                 script {
                     sh '''
@@ -156,9 +144,10 @@ pipeline {
         '''
             }
         }
-      
-    }
+    
 
+
+    }
     post {
         always {
             // Send a Slack notification after the build completes (success or failure)
@@ -170,18 +159,7 @@ pipeline {
                     tokenCredentialId: 'slack-jenkins-token-ID'
                 )
             }
-        start {
-        // Send a Slack notification when the build starts
-            script {
-                slackSend(
-                    color: 'good',
-                    message: "Build Started: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
-                    channel: '#dev-lions',
-                    tokenCredentialId: 'slack-jenkins-token-ID'
-            )
-        }
+       }
     }
-        }
-    }
-
+  
 }
