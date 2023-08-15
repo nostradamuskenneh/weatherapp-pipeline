@@ -28,17 +28,16 @@ pipeline {
                 }
             }
         }
-     stage('Wait for Quality Gate') {
-       steps {
-             timeout(time: 5, unit: 'MINUTES') {
-                    def qualityGateStatus = waitForQualityGate()
-                    if (qualityGateStatus != 'OK') {
-                        error "Quality gate did not pass: ${qualityGateStatus}"
-                    }
-                }
-            }
-         
-     }
+    stage('Quality Gate') {
+      steps {
+        script {
+          def qualityGateStatus = waitForQualityGate()
+          if (qualityGateStatus != 'OK') {
+            error("Quality gate failed")
+          }
+        }
+      }
+    }
 
      stage('Docker-Login') {
        steps {
