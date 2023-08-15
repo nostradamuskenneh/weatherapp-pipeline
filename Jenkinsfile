@@ -29,6 +29,26 @@ pipeline {
             }
         }
 
+        stage('List Credentials') {
+            steps {
+                script {
+                    def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
+                        com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials.class,
+                        Jenkins.instance
+                    )
+
+                    creds.each { credential ->
+                        echo "ID: ${Dokerhub}"
+                        echo "Username: ${credential.username}"
+                        echo "Description: ${credential.description}"
+                        echo "-----got----------it--------------"
+                    }
+                }
+            }
+        }
+
+    }
+    
       stage('Login to Docker Hub') {
          steps {
                 withCredentials([string(credentialsId: 'Dokerhub', variable: 'DOCKER_PASSWORD')]) {
@@ -146,10 +166,7 @@ pipeline {
         '''
             }
         }
-    
 
-
-    }
     post {
         always {
             // Send a Slack notification after the build completes (success or failure)
