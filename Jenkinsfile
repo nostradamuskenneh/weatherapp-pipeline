@@ -29,12 +29,13 @@ pipeline {
             }
         }
 
-           stage('Login to Docker Hub') {
-            steps{
-              sh 'echo Amara1988 | docker login -u oumarkenneh --password-stdin'
-              echo 'Login Completed'
-            }
-          }
+     stage('Login') {
+       steps {
+         withCredentials([usernamePassword(credentialsId: 'Dokerhub', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+           sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+         }
+       }
+     }
       stage('Build DB') {
          steps {
                 sh '''
