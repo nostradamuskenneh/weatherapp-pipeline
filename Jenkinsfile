@@ -11,7 +11,7 @@ pipeline {
              '''
          }  
      }
-     stage('SonarQube analysis') {
+         stage('SonarQube analysis') {
             agent {
                 docker {
                   image 'sonarsource/sonar-scanner-cli:4.7.0'
@@ -22,156 +22,11 @@ pipeline {
         //  scannerHome = tool 'Sonar'
         scannerHome='/opt/sonar-scanner'
     }
-       steps{
+            steps{
                 withSonarQubeEnv('Sonar') {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
-//     stage('Wait for Quality Gate') {
-//       steps {
-//         timeout(time: 5, unit: 'MINUTES') {
-//           script {
-//             def qualityGateStatus = waitForQualityGate()
-//             if (qualityGateStatus != "OK") {
-//               error "Quality gate did not pass: ${qualityGateStatus}"
-//             }
-//           }
-//         }
-//       }
-//     }
-     stage('Docker-Login') {
-       steps {
-         withCredentials([usernamePassword(credentialsId: 'Dokerhub', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-           sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
-         }
-       }
-     }
-      stage('Build DB, AUTH, WEATHER, UI') {
-         steps {
-                sh '''
-                cd DB
-                docker build -t db .
-                cd -
-                cd UI
-                docker build -t ui .
-                cd -
-                cd auth
-                docker build -t auth .
-                cd -
-                cd weather
-                docker build -t weather .
-                
-                
-                ls 
-                pwd
-                '''
-            }
-        }
-
-        stage('  tag images') {
-            steps {
-                sh '''
-                docker   tag db oumarkenneh/db:${BUILD_NUMBER}
-                docker   tag ui oumarkenneh/ui:${BUILD_NUMBER}
-                docker   tag auth oumarkenneh/auth:${BUILD_NUMBER}
-                docker   tag weather oumarkenneh/weather:${BUILD_NUMBER}
-                ls 
-                pwd
-                '''
-            }
-        }
-        stage('publish images') {
-            steps {
-                sh '''
-                docker push  oumarkenneh/db:${BUILD_NUMBER}
-                docker push  oumarkenneh/ui:${BUILD_NUMBER}
-                docker push  oumarkenneh/auth:${BUILD_NUMBER}
-                docker push  oumarkenneh/weather:${BUILD_NUMBER}
-                ls 
-                pwd
-                '''
-            }
-       }
-        stage('Build') {
-            steps {
-                script {
-                    sh '''
-                        rm -rf  CHARTS1 || true
-                        git clone git@github.com:nostradamuskenneh/CHARTS1.git
-                        cd CHARTS1
-                        echo "image: 
-                                repository: oumarkenneh/auth
-                                tag:${BUILD_NUMBER}" >  weatherapp-auth/dev-value.yaml
-
-                        echo "image: 
-                                repository: oumarkenneh/db
-                                tag:${BUILD_NUMBER}" > weatherapp-mysql/dev-value.yaml
-                        echo "image: 
-                                repository: oumarkenneh/weather
-                                tag:${BUILD_NUMBER}" > weatherapp-weather/dev-value.yaml
-                        echo "image: 
-                                repository: oumarkenneh/ui
-                                tag:${BUILD_NUMBER}" > weatherapp-ui/dev-value.yaml
-                        git add .
-                        git commit -m "Jenkins automated commit"
-                        git push origin main
-                        ls
-                        pwd
-                        id
-
-                    '''
-                }
-            }
-        }
-
-        stage('update weatherapp-weather') {
-            steps {
-                sh '''
-                ls
-                pwd
-                '''
-            }
-        }
-        stage('update weatherapp-ui') {
-            steps {
-                sh '''
-                ls
-                '''
-            }
-        }
-        stage('update weatherapp-auth') {
-            steps {
-                sh '''
-                 pwd
-
-                '''
-            }
-        }
-        stage('update weatherapp-mysql') {
-            steps {
-        sh '''
-           id
-
-        '''
-            }
-        }
-    
-
-
     }
-    post {
-        always {
-            // Send a Slack notification after the build completes (success or failure)
-            script {
-                slackSend(
-                    color: currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'good' : 'danger',
-                    message: "Build Status: ${currentBuild.currentResult} \nJob Name: ${env.JOB_NAME} \nBuild Number: ${env.BUILD_NUMBER}",
-                    channel: '#dev-lions',
-                    tokenCredentialId: 'slack-jenkins-token-ID'
-                )
-            }
-       }
-    }
-  
 }
